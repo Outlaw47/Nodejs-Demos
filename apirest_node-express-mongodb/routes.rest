@@ -2,6 +2,29 @@ GET http://localhost:3000/subscribers
 
 ###
 
-GET http://localhost:3000/subscribers/15
+GET http://localhost:3000/subscribers/5ed72ccbe0d0643b2497b226
 
 
+###
+
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+    "name": "Carlos",
+    "subscribedToChannel": "Sitio Youtube"
+}
+
+###
+
+DELETE http://localhost:3000/subscribers/5ed7305d26b3a543c048e154
+
+###
+
+PATCH  http://localhost:3000/subscribers/5ed7307e26b3a543c048e155
+
+Content-Type: application/json
+
+{
+    "name": "Pancho"
+}
