@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const dao = require("./dao");
+const dao_sp = require("./dao_sp");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,6 +37,13 @@ router.get("/producto", function (request, response) {
       sql = "DELETE FROM PRODUCTO WHERE COD=:cod";
       var cod = parseFloat(request.query.cod);
       dao.open(sql, [cod], true, response);
+      break;
+    case 5:
+      //execute the SP with ref_cursor:
+      sql = "BEGIN pkg_test_producto.get_producto(:cod, :cursor); END;";
+      var cod = parseInt(request.query.cod);
+      //dao.open(sql, [cod], true, response);
+      dao_sp.executeSP(cod, response);
       break;
     default:
       response.contentType("application/json").status(200);

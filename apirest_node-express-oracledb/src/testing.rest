@@ -1,0 +1,27 @@
+//Traer todos los productos
+GET http://localhost:3000/producto?opc=1
+
+
+###
+//Traer por codigo de producto
+GET http://localhost:3000/producto?opc=2&cod=1
+
+
+###
+//Insertar un nuevo producto
+POST http://localhost:3000/producto?opc=3&nombre=TV&pu=90.4&fecfab=15052019
+
+
+###
+//Eliminar un producto
+POST http://localhost:3000/producto?opc=4&cod=4
+
+
+###
+//Actualizar precio de un producto
+GET http://localhost:3000/producto?opc=5&cod=4&pu=550
+
+
+###
+//Ejecutar un SP
+GET http://localhost:3000/producto?opc=5&cod=21

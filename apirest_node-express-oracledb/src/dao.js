@@ -1,5 +1,5 @@
 // ----- JS de conexion a Oracle ----- //
-const objOracle = require("oracledb");
+const oracledb = require("oracledb");
 cns = {
   user: "carlos",
   password: "car47yo0Ora",
@@ -17,7 +17,7 @@ error = (err, rs, cn) => {
 };
 
 open = (sql, binds, dml, rs) => {
-  objOracle.getConnection(cns, (err, cn) => {
+  oracledb.getConnection(cns, (err, cn) => {
     if (error(err, rs, null) == -1) return;
     cn.execute(sql, binds, { autoCommit: dml }, (err, result) => {
       if (error(err, rs, cn) == -1) return;
@@ -39,6 +39,26 @@ close = (cn) => {
     }
   });
 };
+
+// executeSP = async (p_cod, rs) => {
+//   oracledb.getConnection(cns, (err, cn) => {
+//     if (error(err, rs, null) == -1) return;
+//     cn.execute(
+//       "BEGIN pkg_test_producto.get_producto(:cod, :cursor); END;",
+//       {
+//         cod: p_cod,
+//         cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
+//       },
+//       async function (err, result) {
+//         const resultSet = result.outBinds.cursor;
+//         var rows = resultSet.getRows(1);
+//         console.log(rows);
+//         await resultSet.close();
+//         close(cn);
+//       }
+//     );
+//   });
+// };
 
 exports.open = open;
 exports.close = close;
