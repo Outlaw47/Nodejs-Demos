@@ -1,0 +1,2 @@
+// list users
+GET http://localhost:3000/users?page=3&limit=5
